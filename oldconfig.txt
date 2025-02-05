@@ -1,7 +1,7 @@
 [server]
 headless = true
-port = 8501
-enableCORS = false
+address = "0.0.0.0"
+port = 5000
 
 [theme]
 primaryColor = "#FEE960"
