@@ -25,6 +25,11 @@ visualizer = DashboardVisualizer()
 st.markdown(apply_custom_styles(), unsafe_allow_html=True)
 
 def login_page():
+    # Center the logo
+    col1, col2, col3 = st.columns([1,2,1])
+    with col2:
+        st.image("attached_assets/Braavos Capital logo_gold.jpg", width=200)
+
     st.title("Financial Dashboard Login")
 
     username = st.text_input("Username")
@@ -41,7 +46,8 @@ def login_page():
 def main_dashboard():
     st.title("Financial Metrics Dashboard")
 
-    # Sidebar
+    # Sidebar with logo
+    st.sidebar.image("attached_assets/Braavos Capital logo_white.jpg", width=150)
     st.sidebar.title(f"Welcome, {st.session_state.username}")
     if st.sidebar.button("Logout"):
         st.session_state.authenticated = False
