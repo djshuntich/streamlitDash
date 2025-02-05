@@ -28,7 +28,7 @@ def login_page():
     # Center the logo
     col1, col2, col3 = st.columns([1,2,1])
     with col2:
-        st.image("attached_assets/Braavos_Capital_logo_gold.png", width=200)
+        st.image("attached_assets/Braavos%20Capital%20logo_gold.jpg", width=200)
 
     st.title("Financial Dashboard Login")
 
@@ -47,7 +47,7 @@ def main_dashboard():
     st.title("Financial Metrics Dashboard")
 
     # Sidebar with logo
-    st.sidebar.image("attached_assets/Braavos_Capital_logo_white.png", width=150)
+    st.sidebar.image("attached_assets/Braavos%20Capital%20logo_white.jpg", width=150)
     st.sidebar.title(f"Welcome, {st.session_state.username}")
     if st.sidebar.button("Logout"):
         st.session_state.authenticated = False
