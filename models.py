@@ -10,7 +10,7 @@ Session = sessionmaker(bind=engine)
 
 class FinancialRecord(Base):
     __tablename__ = 'financial_records'
-    
+
     id = Column(Integer, primary_key=True)
     date = Column(Date, nullable=False)
     expenses = Column(Float, nullable=False)
@@ -26,7 +26,12 @@ class FinancialRecord(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 def init_db():
-    Base.metadata.create_all(engine)
+    try:
+        # Create tables if they don't exist
+        Base.metadata.create_all(engine)
+    except Exception as e:
+        print(f"Error initializing database: {e}")
+        raise
 
 def get_session():
     return Session()
