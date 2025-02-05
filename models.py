@@ -26,12 +26,22 @@ class FinancialRecord(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 def init_db():
+    from sqlalchemy import inspect, text
+
+    inspector = inspect(engine)
     try:
-        # Create tables if they don't exist
-        Base.metadata.create_all(engine)
+        # Check if table exists first
+        if not inspector.has_table('financial_records'):
+            Base.metadata.create_all(engine)
+        print("Database initialization completed successfully")
     except Exception as e:
         print(f"Error initializing database: {e}")
-        raise
+        # Clean up any partial initialization
+        with engine.connect() as connection:
+            connection.execute(text("DROP TABLE IF EXISTS financial_records CASCADE"))
+            connection.execute(text("DROP SEQUENCE IF EXISTS financial_records_id_seq CASCADE"))
+        # Try one more time
+        Base.metadata.create_all(engine)
 
 def get_session():
     return Session()
