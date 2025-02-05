@@ -34,7 +34,7 @@ def login_page():
         if auth_manager.verify_user(username, password):
             st.session_state.authenticated = True
             st.session_state.username = username
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.error("Invalid credentials")
 
@@ -46,7 +46,7 @@ def main_dashboard():
     if st.sidebar.button("Logout"):
         st.session_state.authenticated = False
         st.session_state.username = None
-        st.experimental_rerun()
+        st.rerun()
 
     # File upload section
     uploaded_file = st.file_uploader("Upload Excel File", type=['xlsx', 'xls'])
